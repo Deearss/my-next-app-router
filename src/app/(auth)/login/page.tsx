@@ -121,10 +121,16 @@ const LoginPage = ({ searchParams }: any) => {
     setError("");
     setIsLoading(true);
 
-    signIn("google", {
-      redirect: false,
-      callbackUrl,
-    });
+    try {
+      await signIn("google", {
+        redirect: false,
+        callbackUrl,
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error: any) {
+      setError("Failed to sign in with Google");
+      setIsLoading(false);
+    }
   };
 
   return (
